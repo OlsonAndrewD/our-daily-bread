@@ -19,7 +19,8 @@
         text...
     </div>
     <div class="col-xs-12" ng-show="contentType === 'audio'">
-        audio...
+        <p ng-hide="audioSourceUrl">Loading...</p>
+        <audio ng-show="audioSourceUrl" controls odb-src url="audioSourceUrl"><p>Your browser does not support the audio element.</p></audio>
     </div>
     <div class="col-xs-12" ng-show="contentType === 'video'">
         video...
