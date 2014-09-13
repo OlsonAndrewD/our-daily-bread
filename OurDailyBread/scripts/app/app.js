@@ -1,4 +1,4 @@
-﻿var module = angular.module("odb", ["ngRoute"]);
+﻿var module = angular.module("odb", ["ngRoute", "ui.bootstrap"]);
 
 module.config(["$routeProvider",
     function ($routeProvider) {

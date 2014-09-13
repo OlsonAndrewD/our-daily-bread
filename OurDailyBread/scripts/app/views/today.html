@@ -3,8 +3,28 @@
         <h2>Today: {{ scriptureReference }}</h2>
     </div>
     <div class="col-sm-6">
-        <button class="btn btn-link">Text</button>
-        <button class="btn btn-link">Audio</button>
-        <button class="btn btn-link">Video</button>
+        <div class="btn-group">
+            <label class="btn btn-default" ng-model="contentType" btn-radio="'text'" uncheckable>Text</label>
+            <label class="btn btn-default" ng-model="contentType" btn-radio="'audio'" uncheckable>Audio</label>
+            <label class="btn btn-default" ng-model="contentType" btn-radio="'video'" uncheckable>Video</label>
+        </div>
+    </div>
+</div>
+
+<div class="content-view" ng-show="contentType">
+    <div class="row" ng-show="contentType === 'text'">
+        <div class="col-xs-12">
+            text...
+        </div>
+    </div>
+    <div class="row" ng-show="contentType === 'audio'">
+        <div class="col-xs-12">
+            audio...
+        </div>
+    </div>
+    <div class="row" ng-show="contentType === 'video'">
+        <div class="col-xs-12">
+            video...
+        </div>
     </div>
 </div>
