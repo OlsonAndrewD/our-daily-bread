@@ -11,27 +11,21 @@
     </div>
 </div>
 
-<div class="content-view" ng-show="contentType">
-    <div class="row" ng-show="contentType === 'text'">
-        <div class="col-xs-12">
-            text...
-        </div>
+<div class="row content-view" ng-show="contentType">
+    <div class="col-xs-12" ng-show="contentType === 'text'">
+        text...
     </div>
-    <div class="row" ng-show="contentType === 'audio'">
-        <div class="col-xs-12">
-            audio...
-        </div>
+    <div class="col-xs-12" ng-show="contentType === 'audio'">
+        audio...
     </div>
-    <div class="row" ng-show="contentType === 'video'">
-        <div class="col-xs-12">
-            video...
-        </div>
+    <div class="col-xs-12" ng-show="contentType === 'video'">
+        video...
     </div>
 </div>
 
-<div class="panel panel-default response">
-    <div class="panel-heading">Thoughts</div>
-    <div class="panel-body">
-        <textarea class="form-control" odb-text-area-auto-height></textarea>
+<div class="row">
+    <div class="col-xs-12">
+        <label for="response">Thoughts</label>
+        <textarea id="response" class="form-control"></textarea>
     </div>
 </div>
