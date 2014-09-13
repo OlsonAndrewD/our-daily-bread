@@ -21,10 +21,24 @@
                 $scope.textVerses = data;
             });
 
+        $http.get("http://dbt.io/video/videolocation?" + queryParams).
+            success(function (data) {
+                var locationInfo = data[0];
+                videoRootUrl = locationInfo.protocol + "://" + locationInfo.server + locationInfo.root_path + "/";
+                updateVideoSource();
+            });
+
         function updateAudioSource() {
             $http.get("http://dbt.io/audio/path?" + queryParams + "&dam_id=ENGESVO2DA&book_id=Ps&chapter_id=90").
                 success(function (data) {
                     $scope.audioSourceUrl = audioRootUrl + data[0].path;
+                });
+        };
+
+        function updateVideoSource() {
+            $http.get("http://dbt.io/video/videopath?" + queryParams + "&dam_id=ASESLVO2DV&book_id=Gen&chapter_id=1&encoding=mp4").
+                success(function (data) {
+                    $scope.videoSourceUrl = videoRootUrl + data[0].path;
                 });
         };
     }

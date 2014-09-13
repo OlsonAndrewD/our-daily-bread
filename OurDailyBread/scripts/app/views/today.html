@@ -23,10 +23,13 @@
     </div>
     <div class="col-xs-12" ng-show="contentType === 'audio'">
         <p ng-hide="audioSourceUrl">Loading...</p>
-        <audio ng-show="audioSourceUrl" controls odb-src url="audioSourceUrl"><p>Your browser does not support the audio element.</p></audio>
+        <audio ng-show="audioSourceUrl" controls odb-src url="audioSourceUrl">Your browser does not support the audio element.</audio>
     </div>
     <div class="col-xs-12" ng-show="contentType === 'video'">
-        video...
+        <p ng-hide="videoSourceUrl">Loading...</p>
+        <video ng-show="videoSourceUrl" controls odb-src url="videoSourceUrl" style=" width:100%">
+            Your browser does not support the video element.
+        </video>
     </div>
 </div>
 
