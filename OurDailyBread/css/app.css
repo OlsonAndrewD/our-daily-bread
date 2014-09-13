@@ -8,3 +8,34 @@
     border-bottom: 1px solid gray;
     padding: 15px 0;
 }
+
+.response {
+    margin: 15px 0;
+}
+
+/* Auto-height for textarea */
+
+textarea {
+    min-height: 150px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #444;
+    padding: 5px;
+}
+
+.noscroll {
+    overflow: hidden;
+}
+
+.hiddendiv {
+    display: none;
+    white-space: pre-wrap;
+    width: 500px;
+    min-height: 50px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    padding: 5px;
+    word-wrap: break-word;
+}
+
+/* end textarea */
