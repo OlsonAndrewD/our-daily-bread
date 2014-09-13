@@ -5,7 +5,7 @@
         var queryParams = "key=" + apiKey + "&v=2";
         var audioRootUrl, videoRootUrl;
 
-        $scope.scriptureReference = "Genesis 1";
+        $scope.scriptureReference = "Psalm 90";
         $scope.contentType = "audio";
 
         $http.get("http://dbt.io/audio/location?" + queryParams).
@@ -13,6 +13,12 @@
                 var locationInfo = data[0];
                 audioRootUrl = locationInfo.protocol + "://" + locationInfo.server + locationInfo.root_path + "/";
                 updateAudioSource();
+            });
+
+        $http.get("http://dbt.io/text/verse?" + queryParams + "&dam_id=ENGESVO2ET&book_id=Ps&chapter_id=90").
+            success(function (data) {
+                angular.forEach(data, function (verse) { verse.verse_id = Number(verse.verse_id); });
+                $scope.textVerses = data;
             });
 
         function updateAudioSource() {

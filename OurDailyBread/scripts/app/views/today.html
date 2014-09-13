@@ -16,7 +16,10 @@
 
 <div class="row content-view" ng-show="contentType">
     <div class="col-xs-12" ng-show="contentType === 'text'">
-        text...
+        <p ng-hide="textVerses">Loading...</p>
+        <p ng-repeat="v in textVerses | orderBy:'verse_id'">
+            <sup>{{ v.verse_id }}</sup> {{ v.verse_text }}
+        </p>
     </div>
     <div class="col-xs-12" ng-show="contentType === 'audio'">
         <p ng-hide="audioSourceUrl">Loading...</p>
