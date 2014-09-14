@@ -1,46 +1,93 @@
 ﻿angular.module("odb").controller("TodayController", [
-    "$scope", "$http",
-    function ($scope, $http) {
-        var apiKey = "dcf32e6c4f77d824036c627c94090613";
-        var queryParams = "key=" + apiKey + "&v=2";
+    "$scope", "$http", "$modal", "apiQueryParams",
+    function ($scope, $http, $modal, queryParams) {
         var audioRootUrl, videoRootUrl;
 
-        $scope.scriptureReference = "Psalm 90";
+        $scope.$watch("scriptureReference", function () { refreshContent(); });
+
+        $scope.scriptureReference = {
+            book: { book_id: "Ps", book_name: "Psalms" },
+            chapter: 90
+        };
         $scope.contentType = "audio";
         $scope.responding = true;
 
-        $http.get("http://dbt.io/audio/location?" + queryParams).
-            success(function (data) {
-                var locationInfo = data[0];
-                audioRootUrl = locationInfo.protocol + "://" + locationInfo.server + locationInfo.root_path + "/";
-                updateAudioSource();
+        $scope.changeScripture = function () {
+            $modal.open({
+                templateUrl: "Scripts/app/views/change-scripture.html",
+                controller: "ChangeScriptureController"
+            }).
+            result.then(function (selection) {
+                if (selection) {
+                    $scope.scriptureReference = selection;
+                }
             });
+        };
 
-        $http.get("http://dbt.io/text/verse?" + queryParams + "&dam_id=ENGESVO2ET&book_id=Ps&chapter_id=90").
-            success(function (data) {
-                angular.forEach(data, function (verse) { verse.verse_id = Number(verse.verse_id); });
-                $scope.textVerses = data;
-            });
+        function refreshContent() {
+            if (!$scope.scriptureReference || !$scope.scriptureReference.book || !$scope.scriptureReference.chapter) {
+                $scope.textVerses = null;
+                $scope.audioSourceUrl = null;
+                $scope.videoSourceUrl = null;
+                return;
+            }
+            else {
+                $scope.loadingText = $scope.loadingAudio = $scope.loadingVideo = true;
+            }
 
-        $http.get("http://dbt.io/video/videolocation?" + queryParams).
-            success(function (data) {
-                var locationInfo = data[0];
-                videoRootUrl = locationInfo.protocol + "://" + locationInfo.server + locationInfo.root_path + "/";
-                updateVideoSource();
-            });
+            var textUrl = "http://dbt.io/text/verse?" + queryParams +
+                "&dam_id=ENGESVO2ET&book_id=" + $scope.scriptureReference.book.book_id +
+                "&chapter_id=" + $scope.scriptureReference.chapter;
+
+            $http.get(textUrl).
+                success(function (data) {
+                    angular.forEach(data, function (verse) { verse.verse_id = Number(verse.verse_id); });
+                    $scope.textVerses = data;
+                })["finally"](function () { $scope.loadingText = false; });
+
+            $http.get("http://dbt.io/audio/location?" + queryParams).
+                success(function (data) {
+                    var locationInfo = data[0];
+                    audioRootUrl = locationInfo.protocol + "://" + locationInfo.server + locationInfo.root_path + "/";
+                    updateAudioSource();
+                }).
+                error(function () { $scope.loadingAudio = false; });
+
+            $http.get("http://dbt.io/video/videolocation?" + queryParams).
+                success(function (data) {
+                    var locationInfo = data[0];
+                    videoRootUrl = locationInfo.protocol + "://" + locationInfo.server + locationInfo.root_path + "/";
+                    updateVideoSource();
+                }).
+                error(function () { $scope.loadingVideo = false; });
+        };
 
         function updateAudioSource() {
-            $http.get("http://dbt.io/audio/path?" + queryParams + "&dam_id=ENGESVO2DA&book_id=Ps&chapter_id=90").
+            var url = "http://dbt.io/audio/path?" + queryParams +
+                "&dam_id=ENGESVO2DA&book_id=" + $scope.scriptureReference.book.book_id +
+                "&chapter_id=" + $scope.scriptureReference.chapter;
+
+            $http.get(url).
                 success(function (data) {
                     $scope.audioSourceUrl = audioRootUrl + data[0].path;
-                });
+                })["finally"](function () { $scope.loadingAudio = false; });
         };
 
         function updateVideoSource() {
-            $http.get("http://dbt.io/video/videopath?" + queryParams + "&dam_id=ASESLVO2DV&book_id=Gen&chapter_id=1&encoding=mp4").
-                success(function (data) {
+            var url = "http://dbt.io/video/videopath?" + queryParams +
+                "&dam_id=ASESLVO2DV&encoding=mp4" +
+                "&book_id=" + $scope.scriptureReference.book.book_id +
+                "&chapter_id=" + $scope.scriptureReference.chapter;
+
+            $http.get(url).success(function (data) {
+                if (data && data.length) {
                     $scope.videoSourceUrl = videoRootUrl + data[0].path;
-                });
+                    $scope.noVideo = false;
+                }
+                else {
+                    $scope.noVideo = true;
+                }
+            })["finally"](function () { $scope.loadingVideo = false; });
         };
     }
 ]);

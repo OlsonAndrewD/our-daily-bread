@@ -160,9 +160,12 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\changeScriptureController.js" />
     <Content Include="Scripts\app\directives\odb-src.js" />
     <Content Include="Scripts\app\directives\textAreaAutoHeight.js" />
+    <Content Include="Scripts\app\services\apiQueryParams.js" />
     <Content Include="Scripts\app\todayController.js" />
+    <Content Include="Scripts\app\views\change-scripture.html" />
     <Content Include="Scripts\app\views\today.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

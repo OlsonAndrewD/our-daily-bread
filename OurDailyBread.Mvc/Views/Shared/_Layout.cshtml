@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
     <title>Our Daily Bread</title>
-    <link href="Content/bootstrap.css" rel="stylesheet" />
-    <link href="css/app.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/app.css" rel="stylesheet" />
     <script>
         if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
             var msViewportStyle = document.createElement("style");
@@ -41,13 +41,15 @@
 
     @RenderBody()
 
-    <script src="scripts/jquery-1.9.1.js"></script>
-    <script src="scripts/bootstrap.js"></script>
-    <script src="scripts/angular.js"></script>
-    <script src="scripts/angular-route.js"></script>
-    <script src="scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
-    <script src="scripts/app/app.js"></script>
-    <script src="scripts/app/todayController.js"></script>
-    <script src="scripts/app/directives/odb-src.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/Scripts/app/app.js"></script>
+    <script src="~/Scripts/app/todayController.js"></script>
+    <script src="~/Scripts/app/changeScriptureController.js"></script>
+    <script src="~/Scripts/app/directives/odb-src.js"></script>
+    <script src="~/Scripts/app/services/apiQueryParams.js"></script>
 </body>
 </html>

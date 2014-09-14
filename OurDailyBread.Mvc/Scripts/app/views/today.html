@@ -1,6 +1,9 @@
 ﻿<div class="row">
     <div class="col-xs-12">
-        <h2>Today: {{ scriptureReference }}</h2>
+        <h2 class="today-header">
+            Today: {{ scriptureReference.book.book_name }} {{ scriptureReference.chapter }}
+        </h2>
+        <button class="btn btn-link btn-sm" ng-hide="responded" ng-click="changeScripture()">Change</button>
     </div>
 </div>
 
@@ -16,19 +19,20 @@
 
 <div class="row content-view" ng-show="contentType">
     <div class="col-xs-12" ng-show="contentType === 'text'">
-        <p ng-hide="textVerses">Loading...</p>
+        <p ng-show="loadingText">Loading...</p>
         <p ng-repeat="v in textVerses | orderBy:'verse_id'">
             <sup>{{ v.verse_id }}</sup> {{ v.verse_text }}
         </p>
     </div>
     <div class="col-xs-12" ng-show="contentType === 'audio'">
-        <p ng-hide="audioSourceUrl">Loading...</p>
+        <p ng-show="loadingAudio">Loading...</p>
         <audio ng-show="audioSourceUrl" controls odb-src url="audioSourceUrl">
             Sorry, your browser does not support HTML5 audio.
         </audio>
     </div>
     <div class="col-xs-12" ng-show="contentType === 'video'">
-        <p ng-hide="videoSourceUrl">Loading...</p>
+        <p ng-show="loadingVideo">Loading...</p>
+        <p ng-show="!loadingVideo && !videoSourceUrl">Sorry, no video was found for this chapter.</p>
         <video ng-show="videoSourceUrl" controls odb-src url="videoSourceUrl" style=" width:100%">
             Sorry, your browser does not support HTML5 video.
         </video>
@@ -40,7 +44,7 @@
         <label for="response">Thoughts</label>
         <div ng-hide="responding">{{ response }}</div>
         <textarea id="response" class="form-control" ng-model="response" ng-show="responding"></textarea>
-        <button class="btn btn-primary pull-right" style="margin-top:10px;" ng-click="responding = !responding">
+        <button class="btn btn-primary pull-right" style="margin-top:10px;" ng-click="responding = !responding; responded = true">
             {{ responding ? 'Save' : 'Edit' }}
         </button>
     </div>

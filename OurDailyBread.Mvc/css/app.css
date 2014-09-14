@@ -2,6 +2,10 @@
     margin-bottom: 20px;
 }
 
+.today-header {
+    display: inline-block;
+}
+
 .content-view {
     margin: 15px 0;
     border-top: 1px solid #ccc;
