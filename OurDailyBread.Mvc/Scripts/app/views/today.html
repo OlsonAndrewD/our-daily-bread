@@ -1,0 +1,42 @@
+﻿<div class="row">
+    <div class="col-xs-12">
+        <h2>Today: {{ scriptureReference }}</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="btn-group">
+            <label class="btn btn-default" ng-model="contentType" btn-radio="'text'" uncheckable>Text</label>
+            <label class="btn btn-default" ng-model="contentType" btn-radio="'audio'" uncheckable>Audio</label>
+            <label class="btn btn-default" ng-model="contentType" btn-radio="'video'" uncheckable>Video</label>
+        </div>
+    </div>
+</div>
+
+<div class="row content-view" ng-show="contentType">
+    <div class="col-xs-12" ng-show="contentType === 'text'">
+        <p ng-hide="textVerses">Loading...</p>
+        <p ng-repeat="v in textVerses | orderBy:'verse_id'">
+            <sup>{{ v.verse_id }}</sup> {{ v.verse_text }}
+        </p>
+    </div>
+    <div class="col-xs-12" ng-show="contentType === 'audio'">
+        <p ng-hide="audioSourceUrl">Loading...</p>
+        <audio ng-show="audioSourceUrl" controls odb-src url="audioSourceUrl">Your browser does not support the audio element.</audio>
+    </div>
+    <div class="col-xs-12" ng-show="contentType === 'video'">
+        <p ng-hide="videoSourceUrl">Loading...</p>
+        <video ng-show="videoSourceUrl" controls odb-src url="videoSourceUrl" style=" width:100%">
+            Your browser does not support the video element.
+        </video>
+    </div>
+</div>
+
+<div class="row response">
+    <div class="col-xs-12">
+        <label for="response">Thoughts</label>
+        <textarea id="response" class="form-control"></textarea>
+        <button class="btn btn-primary pull-right" style="margin-top:10px;">Save</button>
+    </div>
+</div>

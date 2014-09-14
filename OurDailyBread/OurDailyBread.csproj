@@ -84,6 +84,7 @@
     <Content Include="css\app.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="app.html" />
+    <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="scripts\angular-route.js" />
     <Content Include="scripts\angular-route.min.js" />
@@ -123,10 +124,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\TwilioController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scripts\app\misc\" />
+    <Folder Include="Views\Twilio\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
