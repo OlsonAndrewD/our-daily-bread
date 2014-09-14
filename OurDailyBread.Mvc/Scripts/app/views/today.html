@@ -40,21 +40,37 @@
     </div>
 </div>
 
-<div class="row response">
-    <div class="col-xs-12">
-        <label for="response">Thoughts</label>
-        <div ng-hide="responding">{{ response }}</div>
-        <textarea id="response" class="form-control" ng-model="response" ng-show="responding"></textarea>
-    </div>
-</div>
+<div style="width:100%; height: 30px;"></div>
 
 <div class="row">
     <div class="col-xs-12">
-        <button class="btn btn-primary pull-left" style="margin-top:10px;" ng-click="save()">
-            {{ responding ? 'Save' : 'Edit' }}
-        </button>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="allDone" ng-change="onAllDoneChanged()" />
+                All done!
+            </label>
+        </div>
     </div>
 </div>
+
+<form name="responseForm">
+    <div class="row">
+        <div class="col-xs-12">
+            <label for="response">Summary / Response</label>
+            <div ng-hide="responding">{{ response }}</div>
+            <textarea id="response" class="form-control" ng-model="response" ng-show="responding"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button class="btn btn-primary pull-left" style="margin-top:10px;" ng-show="!responding || responseForm.$dirty" ng-click="save()">
+                {{ responding ? 'Save' : 'Edit' }}
+            </button>
+        </div>
+    </div>
+</form>
+
+<div style="width:100%; height: 30px;"></div>
 
 <div class="row">
     <div class="col-xs-12">
@@ -68,7 +84,7 @@
     </div>
     <div collapse="!showOtherResponses">
         <div class="other-response clearfix">
-            <div class="col-xs-12"><a href="#">I'm not sure what this means. Can someone help me out?</a></div>
+            <div class="col-xs-12"><a href="#">I'm not sure what this chapter is trying to tell me. Maybe Bob can help me out.</a></div>
             <div class="col-xs-12">&hellip;Alice on 9/14/2014</div>
         </div>
         <div class="other-response clearfix">

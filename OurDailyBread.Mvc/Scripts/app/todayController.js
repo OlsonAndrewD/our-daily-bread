@@ -28,17 +28,28 @@
             });
         };
 
+        $scope.onAllDoneChanged = function () {
+            if ($scope.allDone) {
+                save();
+            }
+        };
+
         $scope.save = function () {
             if ($scope.responding) {
                 $scope.responding = false;
                 $scope.responded = true;
-                people[0].days[5].completed = true;
-                people[0].days[5].scripture = $scope.scriptureReference.book.book_id + " " + $scope.scriptureReference.chapter;
-                people[0].days[5].response = $scope.response;
+                $scope.allDone = true;
+                save();
             }
             else {
                 $scope.responding = true;
             }
+        };
+
+        function save() {
+            people[0].days[5].completed = true;
+            people[0].days[5].scripture = $scope.scriptureReference.book.book_id + " " + $scope.scriptureReference.chapter;
+            people[0].days[5].response = $scope.response;
         };
 
         function refreshContent() {
