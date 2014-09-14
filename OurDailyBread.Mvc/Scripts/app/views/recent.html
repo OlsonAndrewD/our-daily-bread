@@ -6,10 +6,10 @@
 
 <div ng-repeat="person in people">
     <div class="row" style="margin-top:15px;">
-        <div class="col-xs-12"><strong>{{ person.name }}</strong></div>
+        <div class="col-xs-12 col-md-8"><strong>{{ person.name }}</strong></div>
     </div>
     <div class="row">
-        <div class="col-xs-12" ng-repeat="day in person.days">
+        <div class="col-xs-12 col-md-8" ng-repeat="day in person.days">
             <div class="day" ng-class="day.completed ? 'bg-success text-success' : 'bg-danger text-danger'">
                 <div>{{ day.date }}</div>
                 <div ng-if="!day.completed">No entry</div>

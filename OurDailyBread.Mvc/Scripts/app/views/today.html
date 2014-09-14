@@ -19,19 +19,19 @@
 </div>
 
 <div class="row content-view" ng-show="contentType">
-    <div class="col-xs-12" ng-show="contentType === 'text'">
+    <div class="col-xs-12 col-md-8" ng-show="contentType === 'text'">
         <p ng-show="loadingText">Loading...</p>
         <p ng-hide="loadingText" ng-repeat="v in textVerses | orderBy:'verse_id'">
             <sup>{{ v.verse_id }}</sup> {{ v.verse_text }}
         </p>
     </div>
-    <div class="col-xs-12" ng-show="contentType === 'audio'">
+    <div class="col-xs-12 col-md-8" ng-show="contentType === 'audio'">
         <p ng-show="loadingAudio">Loading...</p>
         <audio ng-show="audioSourceUrl && !loadingAudio" controls odb-src url="audioSourceUrl">
             Sorry, your browser does not support HTML5 audio.
         </audio>
     </div>
-    <div class="col-xs-12" ng-show="contentType === 'video'">
+    <div class="col-xs-12 col-md-8" ng-show="contentType === 'video'">
         <p ng-show="loadingVideo">Loading...</p>
         <p ng-show="!loadingVideo && !videoSourceUrl">Sorry, no video was found for this chapter.</p>
         <video ng-show="videoSourceUrl && !loadingVideo" controls odb-src url="videoSourceUrl" style=" width:100%">
@@ -44,7 +44,7 @@
 
 <form name="responseForm">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-md-8">
             <div class="well well-lg">
                 <div class="row">
                     <div class="col-xs-6">
@@ -93,7 +93,7 @@
 </form>
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 col-md-8">
         <h3 class="other-responses-header" ng-show="showOtherResponses">
             Others' responses
         </h3>
@@ -104,12 +104,12 @@
     </div>
     <div collapse="!showOtherResponses">
         <div class="other-response clearfix">
-            <div class="col-xs-12"><a href="#">I'm not sure what this chapter is trying to tell me. Maybe Bob can help me out.</a></div>
-            <div class="col-xs-12">&hellip;Alice on 9/14/2014</div>
+            <div class="col-xs-12 col-md-8"><a href="#">I'm not sure what this chapter is trying to tell me. Maybe Bob can help me out.</a></div>
+            <div class="col-xs-12 col-md-8">&hellip;Alice on 9/14/2014</div>
         </div>
         <div class="other-response clearfix">
-            <div class="col-xs-12"><a href="#">This is a great chapter.</a></div>
-            <div class="col-xs-12">&hellip;Bob on 9/10/2014</div>
+            <div class="col-xs-12 col-md-8"><a href="#">This is a great chapter.</a></div>
+            <div class="col-xs-12 col-md-8">&hellip;Bob on 9/10/2014</div>
         </div>
     </div>
 </div>
