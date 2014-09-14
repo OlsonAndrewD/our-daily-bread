@@ -42,48 +42,60 @@
 
 <div style="width:100%; height: 30px;"></div>
 
-<div class="row">
-    <div class="col-xs-12">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" ng-model="allDone" ng-change="onAllDoneChanged()" />
-                All done!
-            </label>
-        </div>
-    </div>
-</div>
-
 <form name="responseForm">
     <div class="row">
         <div class="col-xs-12">
-            <label for="response">Summary / Response</label>
-            <div ng-hide="responding">{{ response }}</div>
-            <textarea id="response" class="form-control" ng-model="response" ng-show="responding"></textarea>
-        </div>
-    </div>
-    <div class="row" style="margin-top:10px;">
-        <div class="col-xs-3">
-            <button class="btn btn-primary pull-left" ng-show="!responding || responseForm.$dirty" ng-click="save()">
-                {{ responding ? 'Save' : 'Edit' }}
-            </button>
-        </div>
-        <div class="col-xs-9" ng-show="!responding || responseForm.$dirty">
-            <div class="form-group">
-                <select class="form-control">
-                    <option>Keep private</option>
-                    <option>Share with my groups</option>
-                    <option>Share with the world</option>
-                </select>
+            <div class="well well-lg">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="checkbox" style="margin-top:0">
+                            <label>
+                                <input type="checkbox" ng-model="doneForTheDay" ng-change="onDoneForTheDayChanged()" />
+                                Done for today
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-6" ng-show="doneForTheDay">
+                        <div class="checkbox" style="margin-top:0">
+                            <label>
+                                <input type="checkbox" ng-model="repeatTomorrow" />
+                                Repeat chapter tomorrow
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="response">Summary / Response</label>
+                    <div ng-hide="responding">{{ response }}</div>
+                    <textarea id="response" class="form-control" ng-model="response" ng-change="doneForTheDay = true" ng-show="responding"></textarea>
+                </div>
+
+                <div class="row" style="margin-top:10px;">
+                    <div class="col-xs-3">
+                        <button class="btn pull-left" ng-class="responding ? 'btn-success' : 'btn-default'" ng-show="!responding || responseForm.$dirty" ng-click="save()">
+                            {{ responding ? 'Save' : 'Edit' }}
+                        </button>
+                    </div>
+                    <div class="col-xs-9" ng-show="!responding || responseForm.$dirty">
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option>Keep private</option>
+                                <option>Share with my groups</option>
+                                <option>Share with the world</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 </form>
-
-<div style="width:100%; height: 30px;"></div>
 
 <div class="row">
     <div class="col-xs-12">
         <h3 class="other-responses-header" ng-show="showOtherResponses">
-            Others' responses {{ scriptureReference.book.book_name }} {{ scriptureReference.chapter }}
+            Others' responses
         </h3>
         <button type="button" class="btn" ng-class="showOtherResponses ? 'btn-link btn-sm' : 'btn-default'" ng-click="showOtherResponses = !showOtherResponses" ng-style="{'margin-top': showOtherResponses ? 0 : '20px'}">
             {{ showOtherResponses ? 'Hide' : 'Other responses to ' + scriptureReference.book.book_name + ' ' + scriptureReference.chapter }}

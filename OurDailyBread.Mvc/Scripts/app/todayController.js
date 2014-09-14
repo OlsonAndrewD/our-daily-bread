@@ -28,8 +28,8 @@
             });
         };
 
-        $scope.onAllDoneChanged = function () {
-            if ($scope.allDone) {
+        $scope.onDoneForTheDayChanged = function () {
+            if ($scope.doneForTheDay) {
                 save();
             }
         };
@@ -38,7 +38,7 @@
             if ($scope.responding) {
                 $scope.responding = false;
                 $scope.responded = true;
-                $scope.allDone = true;
+                $scope.doneForTheDay = true;
                 save();
             }
             else {
