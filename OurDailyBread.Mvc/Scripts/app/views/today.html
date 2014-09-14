@@ -61,13 +61,21 @@
             <textarea id="response" class="form-control" ng-model="response" ng-show="responding"></textarea>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <button class="btn btn-primary pull-left" style="margin-top:10px;" ng-show="!responding || responseForm.$dirty" ng-click="save()">
+    <div class="row" style="margin-top:10px;">
+        <div class="col-xs-3">
+            <button class="btn btn-primary pull-left" ng-show="!responding || responseForm.$dirty" ng-click="save()">
                 {{ responding ? 'Save' : 'Edit' }}
             </button>
         </div>
-    </div>
+        <div class="col-xs-9" ng-show="!responding || responseForm.$dirty">
+            <div class="form-group">
+                <select class="form-control">
+                    <option>Keep private</option>
+                    <option>Share with my groups</option>
+                    <option>Share with the world</option>
+                </select>
+            </div>
+        </div>
 </form>
 
 <div style="width:100%; height: 30px;"></div>
