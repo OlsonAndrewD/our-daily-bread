@@ -8,8 +8,8 @@
         $scope.$watch("scriptureReference", function () { refreshContent(); });
 
         $scope.scriptureReference = {
-            book: { book_id: "Ps", book_name: "Psalms", dam_id: "ENGESVO2" },
-            chapter: 90
+            book: { book_id: "Gen", book_name: "Genesis", dam_id: "ENGESVO2" },
+            chapter: 1
         };
         $scope.responding = true;
 
