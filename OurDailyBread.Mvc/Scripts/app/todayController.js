@@ -1,6 +1,6 @@
 ﻿angular.module("odb").controller("TodayController", [
-    "$scope", "$http", "$modal", "apiQueryParams",
-    function ($scope, $http, $modal, queryParams) {
+    "$scope", "$http", "$modal", "apiQueryParams", "people",
+    function ($scope, $http, $modal, queryParams, people) {
         var audioRootUrl, videoRootUrl;
 
         $scope.$watch("scriptureReference", function () { refreshContent(); });
@@ -22,6 +22,19 @@
                     $scope.scriptureReference = selection;
                 }
             });
+        };
+
+        $scope.save = function () {
+            if ($scope.responding) {
+                $scope.responding = false;
+                $scope.responded = true;
+                people[0].days[5].completed = true;
+                people[0].days[5].scripture = $scope.scriptureReference.book.book_id + " " + $scope.scriptureReference.chapter;
+                people[0].days[5].response = $scope.response;
+            }
+            else {
+                $scope.responding = true;
+            }
         };
 
         function refreshContent() {
