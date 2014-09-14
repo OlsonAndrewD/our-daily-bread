@@ -6,7 +6,7 @@
         $scope.$watch("scriptureReference", function () { refreshContent(); });
 
         $scope.scriptureReference = {
-            book: { book_id: "Ps", book_name: "Psalms" },
+            book: { book_id: "Ps", book_name: "Psalms", dam_id: "ENGESVO2" },
             chapter: 90
         };
         $scope.contentType = "audio";
@@ -36,7 +36,7 @@
             }
 
             var textUrl = "http://dbt.io/text/verse?" + queryParams +
-                "&dam_id=ENGESVO2ET&book_id=" + $scope.scriptureReference.book.book_id +
+                "&dam_id=ENGESV" + $scope.scriptureReference.book.dam_id[6] + "2ET&book_id=" + $scope.scriptureReference.book.book_id +
                 "&chapter_id=" + $scope.scriptureReference.chapter;
 
             $http.get(textUrl).
@@ -64,18 +64,20 @@
 
         function updateAudioSource() {
             var url = "http://dbt.io/audio/path?" + queryParams +
-                "&dam_id=ENGESVO2DA&book_id=" + $scope.scriptureReference.book.book_id +
+                "&dam_id=ENGESV" + $scope.scriptureReference.book.dam_id[6] + "2DA&book_id=" + $scope.scriptureReference.book.book_id +
                 "&chapter_id=" + $scope.scriptureReference.chapter;
 
             $http.get(url).
                 success(function (data) {
-                    $scope.audioSourceUrl = audioRootUrl + data[0].path;
+                    if (data && data.length) {
+                        $scope.audioSourceUrl = audioRootUrl + data[0].path;
+                    }
                 })["finally"](function () { $scope.loadingAudio = false; });
         };
 
         function updateVideoSource() {
             var url = "http://dbt.io/video/videopath?" + queryParams +
-                "&dam_id=ASESLVO2DV&encoding=mp4" +
+                "&dam_id=ASESLV" + $scope.scriptureReference.book.dam_id[6] + "2DV&encoding=mp4" +
                 "&book_id=" + $scope.scriptureReference.book.book_id +
                 "&chapter_id=" + $scope.scriptureReference.chapter;
 
