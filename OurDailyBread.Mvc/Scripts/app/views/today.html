@@ -44,8 +44,40 @@
         <label for="response">Thoughts</label>
         <div ng-hide="responding">{{ response }}</div>
         <textarea id="response" class="form-control" ng-model="response" ng-show="responding"></textarea>
-        <button class="btn btn-primary pull-right" style="margin-top:10px;" ng-click="responding = !responding; responded = true">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-primary pull-left" style="margin-top:10px;" ng-click="responding = !responding; responded = true">
             {{ responding ? 'Save' : 'Edit' }}
         </button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3 class="other-responses-header" ng-show="showOtherResponses">
+            Others' responses {{ scriptureReference.book.book_name }} {{ scriptureReference.chapter }}
+        </h3>
+        <button type="button" class="btn" ng-class="showOtherResponses ? 'btn-link btn-sm' : 'btn-default'" ng-click="showOtherResponses = !showOtherResponses" ng-style="{'margin-top': showOtherResponses ? 0 : '20px'}">
+            {{ showOtherResponses ? 'Hide' : 'Other responses to ' + scriptureReference.book.book_name + ' ' + scriptureReference.chapter }}
+            <span class="glyphicon" ng-class="{ 'glyphicon-chevron-down': !showOtherResponses }"></span>
+        </button>
+    </div>
+    <div collapse="!showOtherResponses">
+        <div class="other-response clearfix">
+            <div class="col-xs-12"><a href="#">I'm not sure what this means. Can someone help me out?</a></div>
+            <div class="col-xs-12">&hellip;Alice on 9/14/2014</div>
+        </div>
+        <div class="other-response clearfix">
+            <div class="col-xs-12"><a href="#">This is a great chapter.</a></div>
+            <div class="col-xs-12">&hellip;Bob on 9/10/2014</div>
+        </div>
     </div>
 </div>
