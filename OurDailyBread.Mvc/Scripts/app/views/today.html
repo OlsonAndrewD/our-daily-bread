@@ -11,8 +11,9 @@
     <div class="col-xs-12">
         <div class="btn-group">
             <label class="btn btn-default" ng-model="contentType" btn-radio="'text'" uncheckable>Text</label>
-            <label class="btn btn-default" ng-model="contentType" btn-radio="'audio'" uncheckable>Audio</label>
-            <label class="btn btn-default" ng-model="contentType" btn-radio="'video'" uncheckable>Video</label>
+            <label class="btn btn-default" ng-model="contentType" btn-radio="settings.includeVideo ? 'video' : 'audio'" uncheckable>
+                {{ settings.includeVideo ? 'Video' : 'Audio' }}
+            </label>
         </div>
     </div>
 </div>

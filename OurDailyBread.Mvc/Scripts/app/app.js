@@ -14,6 +14,11 @@ module.config(["$routeProvider",
             templateUrl: viewUrl("recent")
         });
 
+        $routeProvider.when("/setup", {
+            controller: "SetupController",
+            templateUrl: viewUrl("setup")
+        });
+
         $routeProvider.otherwise("/today");
 
         function viewUrl(viewName) {

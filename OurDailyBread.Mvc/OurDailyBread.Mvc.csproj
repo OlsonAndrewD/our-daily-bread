@@ -165,8 +165,11 @@
     <Content Include="Scripts\app\directives\textAreaAutoHeight.js" />
     <Content Include="Scripts\app\services\apiQueryParams.js" />
     <Content Include="Scripts\app\services\people.js" />
+    <Content Include="Scripts\app\services\settings.js" />
+    <Content Include="Scripts\app\setupController.js" />
     <Content Include="Scripts\app\todayController.js" />
     <Content Include="Scripts\app\views\change-scripture.html" />
+    <Content Include="Scripts\app\views\setup.html" />
     <Content Include="Scripts\app\views\today.html" />
     <Content Include="Scripts\app\views\recent.html" />
     <Content Include="Scripts\app\recentController.js" />

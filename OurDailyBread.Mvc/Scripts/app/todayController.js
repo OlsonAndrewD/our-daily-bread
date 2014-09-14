@@ -1,7 +1,9 @@
 ﻿angular.module("odb").controller("TodayController", [
-    "$scope", "$http", "$modal", "apiQueryParams", "people",
-    function ($scope, $http, $modal, queryParams, people) {
+    "$scope", "$http", "$modal", "apiQueryParams", "people", "settings",
+    function ($scope, $http, $modal, queryParams, people, settings) {
         var audioRootUrl, videoRootUrl;
+
+        $scope.settings = settings;
 
         $scope.$watch("scriptureReference", function () { refreshContent(); });
 
