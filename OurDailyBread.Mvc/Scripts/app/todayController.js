@@ -7,6 +7,7 @@
 
         $scope.scriptureReference = "Psalm 90";
         $scope.contentType = "audio";
+        $scope.responding = true;
 
         $http.get("http://dbt.io/audio/location?" + queryParams).
             success(function (data) {

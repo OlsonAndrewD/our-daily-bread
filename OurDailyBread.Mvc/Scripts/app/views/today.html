@@ -23,12 +23,14 @@
     </div>
     <div class="col-xs-12" ng-show="contentType === 'audio'">
         <p ng-hide="audioSourceUrl">Loading...</p>
-        <audio ng-show="audioSourceUrl" controls odb-src url="audioSourceUrl">Your browser does not support the audio element.</audio>
+        <audio ng-show="audioSourceUrl" controls odb-src url="audioSourceUrl">
+            Sorry, your browser does not support HTML5 audio.
+        </audio>
     </div>
     <div class="col-xs-12" ng-show="contentType === 'video'">
         <p ng-hide="videoSourceUrl">Loading...</p>
         <video ng-show="videoSourceUrl" controls odb-src url="videoSourceUrl" style=" width:100%">
-            Your browser does not support the video element.
+            Sorry, your browser does not support HTML5 video.
         </video>
     </div>
 </div>
@@ -36,7 +38,10 @@
 <div class="row response">
     <div class="col-xs-12">
         <label for="response">Thoughts</label>
-        <textarea id="response" class="form-control"></textarea>
-        <button class="btn btn-primary pull-right" style="margin-top:10px;">Save</button>
+        <div ng-hide="responding">{{ response }}</div>
+        <textarea id="response" class="form-control" ng-model="response" ng-show="responding"></textarea>
+        <button class="btn btn-primary pull-right" style="margin-top:10px;" ng-click="responding = !responding">
+            {{ responding ? 'Save' : 'Edit' }}
+        </button>
     </div>
 </div>
