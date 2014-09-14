@@ -15,7 +15,10 @@
         $scope.changeScripture = function () {
             $modal.open({
                 templateUrl: "Scripts/app/views/change-scripture.html",
-                controller: "ChangeScriptureController"
+                controller: "ChangeScriptureController",
+                resolve: {
+                    selection: function () { return $scope.scriptureReference; }
+                }
             }).
             result.then(function (selection) {
                 if (selection) {

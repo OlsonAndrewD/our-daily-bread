@@ -1,6 +1,6 @@
 ﻿angular.module("odb").controller("ChangeScriptureController", [
-    "$scope", "$http", "$q", "$modalInstance", "apiQueryParams",
-    function ($scope, $http, $q, $modalInstance, apiQueryParams) {
+    "$scope", "$http", "$q", "$modalInstance", "apiQueryParams", "selection",
+    function ($scope, $http, $q, $modalInstance, apiQueryParams, selection) {
         var otBooks, ntBooks;
 
         var getOTBooks = $http.get("http://dbt.io/library/book?" + apiQueryParams + "&dam_id=ENGESVO2ET&v=2").
@@ -14,10 +14,12 @@
             });
 
         $q.all([getOTBooks, getNTBooks]).then(function () {
+            var selectedBook, i;
+
             $scope.books = otBooks.concat(ntBooks).
                 map(function (book) {
                     book.book_order = Number(book.book_order);
-                    book.chapters = book.chapters.split(",");
+                    book.chapters = book.chapters.split(",").map(function(x) { return Number(x); });
                     return book;
                 }).
                 sort(function (book1, book2) {
@@ -29,23 +31,18 @@
                     }
                     return 0;
                 });
+
+            for (i = 0; i < $scope.books.length; i++) {
+                if ($scope.books[i].book_id === selection.book.book_id) {
+                    selectedBook = $scope.books[i];
+                    break;
+                }
+            }
+            $scope.selection = {
+                book: selectedBook,
+                chapter: selection.chapter
+            };
         });
-
-        $scope.selection = {};
-
-        //$scope.$watch("selectedBookId", function (id) {
-        //    if (id !== null && id !== undefined) {
-        //        for (var i = 0; i < $scope.books.length; i++) {
-        //            if ($scope.books[i].book_id === id) {
-        //                $scope.selectedBook = $scope.books[i];
-        //                break;
-        //            }
-        //        }
-        //    }
-        //    else {
-        //        $scope.selectedBook = null;
-        //    }
-        //});
 
         $scope.ok = function () {
             ($scope.selection && $scope.selection.book && $scope.selection.chapter) ?

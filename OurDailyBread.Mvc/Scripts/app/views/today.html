@@ -20,20 +20,20 @@
 <div class="row content-view" ng-show="contentType">
     <div class="col-xs-12" ng-show="contentType === 'text'">
         <p ng-show="loadingText">Loading...</p>
-        <p ng-repeat="v in textVerses | orderBy:'verse_id'">
+        <p ng-hide="loadingText" ng-repeat="v in textVerses | orderBy:'verse_id'">
             <sup>{{ v.verse_id }}</sup> {{ v.verse_text }}
         </p>
     </div>
     <div class="col-xs-12" ng-show="contentType === 'audio'">
         <p ng-show="loadingAudio">Loading...</p>
-        <audio ng-show="audioSourceUrl" controls odb-src url="audioSourceUrl">
+        <audio ng-show="audioSourceUrl && !loadingAudio" controls odb-src url="audioSourceUrl">
             Sorry, your browser does not support HTML5 audio.
         </audio>
     </div>
     <div class="col-xs-12" ng-show="contentType === 'video'">
         <p ng-show="loadingVideo">Loading...</p>
         <p ng-show="!loadingVideo && !videoSourceUrl">Sorry, no video was found for this chapter.</p>
-        <video ng-show="videoSourceUrl" controls odb-src url="videoSourceUrl" style=" width:100%">
+        <video ng-show="videoSourceUrl && !loadingVideo" controls odb-src url="videoSourceUrl" style=" width:100%">
             Sorry, your browser does not support HTML5 video.
         </video>
     </div>
