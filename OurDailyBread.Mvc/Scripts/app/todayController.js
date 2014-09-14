@@ -9,7 +9,6 @@
             book: { book_id: "Ps", book_name: "Psalms", dam_id: "ENGESVO2" },
             chapter: 90
         };
-        $scope.contentType = "audio";
         $scope.responding = true;
 
         $scope.changeScripture = function () {
